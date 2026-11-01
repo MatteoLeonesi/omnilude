@@ -1,6 +1,6 @@
 # Omnilude
 
-Omnilude is an experimental plugin created to help people use AI more
+Omnilude is an experimental/toy plugin created to help people use AI more
 intentionally in research and development and better judge when to trust
 the results. The goal is to keep human judgment at the center of important
 decisions.
