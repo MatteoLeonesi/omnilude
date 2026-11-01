@@ -5,6 +5,10 @@ intentionally in research and development and better judge when to trust
 the results. The goal is to keep human judgment at the center of important
 decisions.
 
+> [!NOTE]
+> I built this for fun, so please keep expectations low: things may break,
+> and I haven't measured whether it actually helps.
+
 ```mermaid
 ---
 config:
@@ -68,12 +72,6 @@ flowchart LR
     style postlude fill:#f0fdfa,stroke:#99f6e4,color:#115e59,rx:16,ry:16
 ```
 
-> [!NOTE]
-> Built around research workflows, Omnilude can also support bounded software
-> experiments and data analysis. It records assumptions, methods and results
-> for human review. It does not guarantee correct conclusions, and its
-> effectiveness has not yet been measured.
-
 ## TL;DR
 
 | Part | What it means |
@@ -87,6 +85,12 @@ flowchart LR
 | Omnilude | One skill covers Prelude, Interlude and Postlude; local MCP tools record protocols and runs, with CLI access to the same functions |
 | Setup | No Docker, separate agent process or additional model API key. Your experiment may need its own key |
 | Clients | Codex is the primary client; shared skill and backend for [other clients](#distribution-and-compatibility) |
+
+> [!NOTE]
+> Built around research workflows, Omnilude can also support bounded software
+> experiments and data analysis. It records assumptions, methods and results
+> for human review. It does not guarantee correct conclusions, and its
+> effectiveness has not yet been measured.
 
 [Install](#install) · [Research workflow](#research-workflow) ·
 [CLI example](#try-it-from-the-terminal) · [Tool reference](#tool-reference) ·
