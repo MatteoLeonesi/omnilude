@@ -7,7 +7,6 @@
 config:
   theme: base
   htmlLabels: false
-  markdownAutoWrap: false
   fontFamily: Arial
   themeVariables:
     fontFamily: Arial
@@ -25,43 +24,25 @@ config:
 flowchart LR
     subgraph prelude["`**01 · PRELUDE**`"]
         direction TB
-        blueprint["`**BLUEPRINT**
-        Your question
-        Your prediction
-        Data · method · metrics
-        Assumptions · checks
-        Budget · stopping rule`"]
+        blueprint["BLUEPRINT<br/>Your question<br/>Your prediction<br/>Data · method<br/>Metrics<br/>Assumption checks<br/>Budget · stop"]
         blueprint@{ shape: doc }
-        freeze(["`Freeze the
-        Blueprint`"])
+        freeze(["Freeze the<br/>Blueprint"])
         blueprint --> freeze
     end
 
     subgraph interlude["`**02 · INTERLUDE**`"]
         direction TB
-        record["`**RUN RECORD**
-        Frozen inputs
-        Declared steps
-        Outputs · logs · timings
-        Errors · failed attempts
-        Every attempt retained`"]
+        record["RUN RECORD<br/>Frozen inputs<br/>Declared steps<br/>Outputs · logs<br/>Run timings<br/>Errors · failures<br/>Record all attempts"]
         record@{ shape: doc }
-        retain(["`Keep every
-        attempt`"])
+        retain(["Keep every<br/>attempt"])
         record --> retain
     end
 
     subgraph postlude["`**03 · POSTLUDE**`"]
         direction TB
-        evidence["`**EVIDENCE REVIEW**
-        Results vs prediction
-        Assumption checks
-        Method deviations
-        Raw outputs · evidence
-        Your judgment · limits`"]
+        evidence["EVIDENCE<br/>Results vs<br/>your prediction<br/>Assumption checks<br/>Method deviations<br/>Raw evidence<br/>Your judgment"]
         evidence@{ shape: doc }
-        interpret(["`Interpret within
-        scope`"])
+        interpret(["Interpret within<br/>scope"])
         evidence --> interpret
     end
 
