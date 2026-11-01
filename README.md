@@ -2,82 +2,93 @@
 
 **An experimental plugin for structuring and reviewing AI-assisted experiments.**
 
-> [!NOTE]
-> Built around research workflows, Omnilude can also support bounded software
-> experiments and data analysis. It records assumptions, methods and results
-> for human review. It does not guarantee correct conclusions, and its
-> effectiveness has not yet been measured.
-
 ```mermaid
 ---
 config:
   theme: base
   htmlLabels: false
+  markdownAutoWrap: false
   fontFamily: Arial
   themeVariables:
     fontFamily: Arial
-    fontSize: 16px
+    fontSize: 15px
     lineColor: '#94a3b8'
   flowchart:
     curve: linear
-    padding: 18
-    nodeSpacing: 24
-    rankSpacing: 32
+    padding: 16
+    nodeSpacing: 18
+    rankSpacing: 28
     subGraphTitleMargin:
-      top: 12
-      bottom: 12
+      top: 14
+      bottom: 14
 ---
 flowchart LR
     subgraph prelude["`**01 · PRELUDE**`"]
         direction TB
         blueprint["`**BLUEPRINT**
-        Your question · prediction
-        Ingredients: data
-        Steps: method
-        Checks: metrics`"]
+        Your question
+        Your prediction
+        Data · method · metrics
+        Assumptions · checks
+        Budget · stopping rule`"]
         blueprint@{ shape: doc }
-        freeze(["Freeze the Blueprint"])
+        freeze(["`Freeze the
+        Blueprint`"])
         blueprint --> freeze
     end
 
     subgraph interlude["`**02 · INTERLUDE**`"]
         direction TB
-        run["`**Follow the Blueprint**
-        Use the declared inputs
-        Run the fixed steps
-        Save outputs and logs
-        Record errors and failures`"]
-        retain(["Keep every attempt"])
-        run --> retain
+        record["`**RUN RECORD**
+        Frozen inputs
+        Declared steps
+        Outputs · logs · timings
+        Errors · failed attempts
+        Every attempt retained`"]
+        record@{ shape: doc }
+        retain(["`Keep every
+        attempt`"])
+        record --> retain
     end
 
     subgraph postlude["`**03 · POSTLUDE**`"]
         direction TB
-        review["`**Check against Blueprint**
+        evidence["`**EVIDENCE REVIEW**
         Results vs prediction
-        Test assumptions
-        Explain deviations
-        Inspect raw evidence`"]
-        interpret(["Interpret within scope"])
-        review --> interpret
+        Assumption checks
+        Method deviations
+        Raw outputs · evidence
+        Your judgment · limits`"]
+        evidence@{ shape: doc }
+        interpret(["`Interpret within
+        scope`"])
+        evidence --> interpret
     end
 
     prelude --> interlude --> postlude
 
-    classDef content fill:transparent,stroke:none,color:#334155,font-family:Arial,font-size:16px
-    classDef recipe fill:#ffffff,stroke:#60a5fa,stroke-width:1.5px,color:#1e3a8a,font-family:Arial,font-size:16px
-    classDef blue fill:#2563eb,stroke:none,color:#ffffff,font-family:Arial,font-size:15px
-    classDef violet fill:#7c3aed,stroke:none,color:#ffffff,font-family:Arial,font-size:15px
-    classDef teal fill:#0f766e,stroke:none,color:#ffffff,font-family:Arial,font-size:15px
-    class blueprint recipe
-    class run,review content
+    classDef bluePaper fill:#ffffff,stroke:#60a5fa,stroke-width:1.5px,color:#1e3a8a,font-family:Arial,font-size:15px
+    classDef violetPaper fill:#ffffff,stroke:#a78bfa,stroke-width:1.5px,color:#4c1d95,font-family:Arial,font-size:15px
+    classDef tealPaper fill:#ffffff,stroke:#5eead4,stroke-width:1.5px,color:#134e4a,font-family:Arial,font-size:15px
+    classDef blue fill:#2563eb,stroke:none,color:#ffffff,font-family:Arial,font-size:14px
+    classDef violet fill:#7c3aed,stroke:none,color:#ffffff,font-family:Arial,font-size:14px
+    classDef teal fill:#0f766e,stroke:none,color:#ffffff,font-family:Arial,font-size:14px
+    class blueprint bluePaper
+    class record violetPaper
+    class evidence tealPaper
     class freeze blue
     class retain violet
     class interpret teal
-    style prelude fill:#eff6ff,stroke:#bfdbfe,color:#1e40af,font-family:Arial,font-size:14px,font-weight:bold,rx:16,ry:16
-    style interlude fill:#f5f3ff,stroke:#ddd6fe,color:#5b21b6,font-family:Arial,font-size:14px,font-weight:bold,rx:16,ry:16
-    style postlude fill:#f0fdfa,stroke:#99f6e4,color:#115e59,font-family:Arial,font-size:14px,font-weight:bold,rx:16,ry:16
+    style prelude fill:#eff6ff,stroke:#bfdbfe,color:#1e40af,rx:16,ry:16
+    style interlude fill:#f5f3ff,stroke:#ddd6fe,color:#5b21b6,rx:16,ry:16
+    style postlude fill:#f0fdfa,stroke:#99f6e4,color:#115e59,rx:16,ry:16
 ```
+
+> [!NOTE]
+> Built around research workflows, Omnilude can also support bounded software
+> experiments and data analysis. It records assumptions, methods and results
+> for human review. It does not guarantee correct conclusions, and its
+> effectiveness has not yet been measured.
 
 ## TL;DR
 
