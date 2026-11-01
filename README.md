@@ -6,8 +6,9 @@ the results. The goal is to keep human judgment at the center of important
 decisions.
 
 > [!NOTE]
-> I built this for fun, so please keep expectations low: things may break,
-> and I haven't measured whether it actually helps.
+> I built it for fun over the past few days, so please keep expectations low
+> (things may break, and I haven't measured whether it actually helps anyone
+> other than me).
 
 ```mermaid
 ---
