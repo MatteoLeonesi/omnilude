@@ -1,0 +1,20 @@
+{
+  "name": "omnilude-local",
+  "interface": {
+    "displayName": "Omnilude Local"
+  },
+  "plugins": [
+    {
+      "name": "omnilude",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

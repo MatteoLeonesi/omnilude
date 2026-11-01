@@ -1,0 +1,26 @@
+{
+  "name": "omnilude",
+  "version": "0.4.1",
+  "description": "Turn a research idea into a recorded protocol, local experiment and inspectable evidence in your assistant chat.",
+  "author": {
+    "name": "Matteo Leonesi"
+  },
+  "repository": "https://github.com/MatteoLeonesi/omnilude",
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "requires_local_executor": true,
+  "interface": {
+    "displayName": "Omnilude",
+    "shortDescription": "Plan research, inspect results",
+    "longDescription": "Use your current chat to clarify a research question, freeze its protocol, run local commands and inspect recorded results. Local execution has no isolation or complete-chat capture guarantee.",
+    "developerName": "Matteo Leonesi",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Use Omnilude to help me turn my research idea into a small experiment."
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "omnilude": {
+      "type": "stdio",
+      "command": "uv",
+      "args": ["run", "--frozen", "--no-dev", "--directory", "${PLUGIN_ROOT}", "omnilude", "mcp"],
+      "cwd": "${PLUGIN_ROOT}",
+      "startup_timeout_sec": 120,
+      "tool_timeout_sec": 120
+    }
+  }
+}

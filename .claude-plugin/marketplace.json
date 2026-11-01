@@ -1,0 +1,14 @@
+{
+  "name": "omnilude-local",
+  "owner": {
+    "name": "Matteo Leonesi"
+  },
+  "plugins": [
+    {
+      "name": "omnilude",
+      "source": "./",
+      "description": "Plan research and inspect local experiment evidence."
+    }
+  ],
+  "description": "Local research protocols and experiment evidence."
+}

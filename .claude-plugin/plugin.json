@@ -1,0 +1,24 @@
+{
+  "name": "omnilude",
+  "version": "0.4.1",
+  "description": "Turn a research idea into a recorded protocol, local experiment and inspectable evidence in your assistant chat.",
+  "author": {
+    "name": "Matteo Leonesi"
+  },
+  "repository": "https://github.com/MatteoLeonesi/omnilude",
+  "mcpServers": {
+    "omnilude": {
+      "type": "stdio",
+      "command": "uv",
+      "args": [
+        "run",
+        "--frozen",
+        "--no-dev",
+        "--directory",
+        "${CLAUDE_PLUGIN_ROOT}",
+        "omnilude",
+        "mcp"
+      ]
+    }
+  }
+}
