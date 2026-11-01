@@ -1,13 +1,15 @@
 # Omnilude
 
-**An experimental plugin for structuring and reviewing AI-assisted experiments.**
+Omnilude is an experimental plugin created to help people use AI more
+intentionally in research and development and better judge when to trust
+the results. The goal is to keep human judgment at the center of important
+decisions.
 
 ```mermaid
 ---
 config:
   theme: base
   htmlLabels: false
-  markdownAutoWrap: false
   fontFamily: Arial
   themeVariables:
     fontFamily: Arial
@@ -25,43 +27,25 @@ config:
 flowchart LR
     subgraph prelude["`**01 · PRELUDE**`"]
         direction TB
-        blueprint["`**BLUEPRINT**
-        Your question
-        Your prediction
-        Data · method · metrics
-        Assumptions · checks
-        Budget · stopping rule`"]
+        blueprint["BLUEPRINT<br/>Your question<br/>Your prediction<br/>Data · method<br/>Metrics<br/>Assumption checks<br/>Budget · stop"]
         blueprint@{ shape: doc }
-        freeze(["`Freeze the
-        Blueprint`"])
+        freeze(["Freeze the<br/>Blueprint"])
         blueprint --> freeze
     end
 
     subgraph interlude["`**02 · INTERLUDE**`"]
         direction TB
-        record["`**RUN RECORD**
-        Frozen inputs
-        Declared steps
-        Outputs · logs · timings
-        Errors · failed attempts
-        Every attempt retained`"]
+        record["RUN RECORD<br/>Frozen inputs<br/>Declared steps<br/>Outputs · logs<br/>Run timings<br/>Errors · failures<br/>Record all attempts"]
         record@{ shape: doc }
-        retain(["`Keep every
-        attempt`"])
+        retain(["Keep every<br/>attempt"])
         record --> retain
     end
 
     subgraph postlude["`**03 · POSTLUDE**`"]
         direction TB
-        evidence["`**EVIDENCE REVIEW**
-        Results vs prediction
-        Assumption checks
-        Method deviations
-        Raw outputs · evidence
-        Your judgment · limits`"]
+        evidence["EVIDENCE<br/>Results vs<br/>your prediction<br/>Assumption checks<br/>Deviations<br/>Raw evidence<br/>Your judgment"]
         evidence@{ shape: doc }
-        interpret(["`Interpret within
-        scope`"])
+        interpret(["Interpret within<br/>scope"])
         evidence --> interpret
     end
 
@@ -93,7 +77,7 @@ flowchart LR
 ## TL;DR
 
 | Part | What it means |
-|---|---|
+| :--- | :--- |
 | Blueprint | Your experiment's recipe: question, prediction, data, method, metrics, assumptions, checks, budget and stopping rule |
 | Prelude | Start with your question, prediction and metrics; freeze the Blueprint before running |
 | Interlude | Run the experiment locally; retain outputs, logs and every attempt, including failures |
@@ -110,8 +94,10 @@ flowchart LR
 
 ## What it does
 
+### Capabilities
+
 | Function | What you get |
-|---|---|
+| :--- | :--- |
 | Conversational planning | Your question, prediction and metrics first; attributed suggestions and reusable decisions |
 | Checkable assumptions | A statement, reason, control and expected outcome for each assumption |
 | Frozen methods | Exact protocol and file versions; light/full review; linked revisions |
@@ -119,8 +105,10 @@ flowchart LR
 | Evidence review | Logs, artifacts, numeric metrics, integrity checks and assumption outcomes |
 | Chat and CLI access | The same Python functions through MCP tools or terminal commands |
 
+### Current limits
+
 | Boundary | Current limit |
-|---|---|
+| :--- | :--- |
 | Capture | Records activity through Omnilude's tools, not the whole chat |
 | Access | Commands run with the host user's access; no data isolation |
 | Conclusions | Passing checks does not establish the research hypothesis |
@@ -128,18 +116,24 @@ flowchart LR
 
 ## Install
 
+### Requirements
+
 | Requirement | Details |
-|---|---|
+| :--- | :--- |
 | Platform | macOS or Linux |
 | Runtime | Python 3.12+ and [uv](https://docs.astral.sh/uv/getting-started/installation/) |
 | Client | Codex with local plugin support; `uv` on Codex's `PATH` |
 | Source checkout | Build a clean bundle with the first block below |
 | Ready-made bundle | Extract it and skip the build; use its absolute folder path in the install command |
 
+### Build the bundle
+
 ```bash
 uv sync
 python3 scripts/package_plugin.py --output ../omnilude-plugin
 ```
+
+### Install in Codex
 
 ```bash
 codex plugin marketplace add /absolute/path/to/omnilude-plugin
@@ -147,8 +141,10 @@ codex plugin add omnilude@omnilude-local --json
 codex plugin list --json
 ```
 
+### Installation notes
+
 | Step | What to do or expect |
-|---|---|
+| :--- | :--- |
 | Package | Use a new or empty output directory. Install the clean bundle, not the working tree |
 | Bundle contents | Explicitly selected runtime files, one skill, manifests, README and locked dependencies; excludes scratch scripts, `.git`, `.venv`, `.env`, run stores, tests and caches |
 | Developer material | Packaging commands, tests and `AGENTS.md` links require the [source checkout](https://github.com/MatteoLeonesi/omnilude); these files are not in the clean bundle |
@@ -162,7 +158,7 @@ codex plugin list --json
 <summary>Update, uninstall, or launch the server manually</summary>
 
 | Before updating | Requirement |
-|---|---|
+| :--- | :--- |
 | Active runs | Finish them first |
 | Updated checkout | Package into a new directory |
 
@@ -175,7 +171,7 @@ codex plugin add omnilude@omnilude-local --json
 ```
 
 | Action | Details |
-|---|---|
+| :--- | :--- |
 | Load the update | Restart Codex or open a new chat |
 | Uninstall only | Run the two `remove` commands above |
 | Records | Stay in each project's `.omnilude` directory, outside the plugin cache; back up the whole directory |
@@ -187,18 +183,24 @@ codex plugin add omnilude@omnilude-local --json
 
 ## Distribution and compatibility
 
+### Package
+
 | Package | Contents or behavior |
-|---|---|
+| :--- | :--- |
 | Shared components | One [skill](skills/omnilude/SKILL.md) for Prelude, Interlude and Postlude, plus the local MCP server; the same research rules and records across clients |
 | Entry points | [plugin.json](plugin.json) and [mcp.json](mcp.json), plus Codex and Claude Code compatibility metadata |
 | Skill discovery | “Portable packages discover `skills/` automatically.” [Package format](https://developers.openai.com/plugins/deploy/submission#package-identity-and-components) |
 | Skill-only install | Does not connect the execution tools |
 
+### Supported clients
+
 | Client | Current status |
-|---|---|
+| :--- | :--- |
 | Codex | Local marketplace package; MCP workflow tested |
 | Claude Code | Manifest and shared MCP server validated; complete research conversations still need testing |
 | Other MCP clients | Manual STDIO connection available; client-specific installation unverified |
+
+### Claude Code
 
 Preview the clean bundle in Claude Code:
 
@@ -214,12 +216,14 @@ claude plugin install omnilude@omnilude-local
 ```
 
 | Claude Code | Details |
-|---|---|
+| :--- | :--- |
 | Installation | [Official plugin mechanisms](https://code.claude.com/docs/en/plugins) |
 | Installed location | Manifest uses `${CLAUDE_PLUGIN_ROOT}` |
 
+### Public store
+
 | Public store | Status or requirement |
-|---|---|
+| :--- | :--- |
 | Publication | Not published; the local package is a distribution candidate |
 | Eligibility | “Local MCP submissions are limited to approved partners.” [Local MCP eligibility](https://developers.openai.com/plugins/deploy/desktop-only#submit-a-plugin-with-a-local-mcp-server) |
 | Required materials | Organization eligibility, verified publisher identity, product/support/privacy/terms URLs, icons and review materials |
@@ -233,7 +237,7 @@ Start in your own words:
 > My prediction is … The metric I want to measure is …
 
 | Stage | What happens |
-|---|---|
+| :--- | :--- |
 | Prelude: your input | Question, prediction and metrics first. Record their source and any prior exposure to agent suggestions or results |
 | Missing information | Reuse what you already said; ask only for gaps. If you have no prediction or metric yet, say so; label any later assistant proposals |
 | Specify | Fix data and permitted uses, metric definitions, success criteria, run selection/aggregation, constraints, commands, assumptions, controls, budget and stopping rule |
@@ -247,14 +251,16 @@ Start in your own words:
 Choose a review tier (light/full) and a research mode (exploration/confirmation).
 
 | Choice | Rule |
-|---|---|
+| :--- | :--- |
 | **Light** | At most three assumptions; no separate method approval |
 | **Full** | Approve the exact previewed protocol hash; declare a known-outcome control or explain why it is inapplicable |
 | **Exploration** | Probe a bounded question; retain changes, anomalies and inconclusive results |
 | **Confirmation** | Fix hypothesis, prediction, analysis and stopping rule before the run |
 
+### Decisions and revisions
+
 | Decision | Rule |
-|---|---|
+| :--- | :--- |
 | Assumptions | Record statement, reason (`warrant`), check, expected outcome and author |
 | Agent proposals | Require user acceptance, including in light mode. Related proposals can be accepted together; their author stays unchanged |
 | Existing decisions | Reuse unchanged accepted assumptions without another acceptance |
@@ -264,8 +270,10 @@ Choose a review tier (light/full) and a research mode (exploration/confirmation)
 | After a run | A fork after any attempt starts as exploratory; later confirmation needs a fresh-data declaration and a new freeze |
 | Fresh data | The tool records the declaration; it cannot establish that the chat has never seen the data |
 
+### Responsibilities
+
 | Responsibility | Coverage |
-|---|---|
+| :--- | :--- |
 | Enforced by tools | Schemas, required fields, pending assumption acceptance, full-tier approval hashes, freeze-before-run, file integrity and run limits |
 | Guided by the skill | Conversation order, results-free method, acceptance of other substantive proposals, sensible controls and calibrated conclusions |
 | Human provenance | Decisions copied from chat remain reported provenance; the server cannot authenticate authors or inspect a method's meaning |
@@ -273,7 +281,7 @@ Choose a review tier (light/full) and a research mode (exploration/confirmation)
 ### Read the result correctly
 
 | Record | Meaning |
-|---|---|
+| :--- | :--- |
 | Run states | `created` → `running` → `sealed` → `checked` |
 | `sealed` | Evidence retained; no claim of scientific success |
 | `checked` | Mechanical assessment stored; no claim of scientific success |
@@ -292,7 +300,7 @@ Choose a review tier (light/full) and a research mode (exploration/confirmation)
 <summary>Copy-and-run example: create → freeze → run → verify</summary>
 
 | Example | Details |
-|---|---|
+| :--- | :--- |
 | Purpose | Documentation fixture; tests the same functions used by MCP |
 | Requirements | No Docker, model call or external data |
 | Prediction | Known answer supplied by the fixture, not an independent researcher's prediction |
@@ -374,7 +382,7 @@ uv run omnilude research --project "$omnilude_project" evidence "$run_id" \
 ```
 
 | Result or option | Expected behavior |
-|---|---|
+| :--- | :--- |
 | Report | `metrics: {"total": 6}`, state `checked`, hypothesis `not_assessed` |
 | Scientific check | Inspect the value against 6 separately from the automatic JSON-format check |
 | Background run | Omit `--foreground`; poll `status RUN_ID` until `sealed`, then call `verify RUN_ID` |
@@ -386,16 +394,20 @@ uv run omnilude research --project "$omnilude_project" evidence "$run_id" \
 <details>
 <summary>Commands, protocol fields, evidence files and troubleshooting</summary>
 
+### Interface
+
 | Interface | Contract |
-|---|---|
+| :--- | :--- |
 | Project | Absolute, existing directory; records stored at `<project>/.omnilude` |
 | Alternate CLI store | `--root /absolute/store` |
 | CLI prefix | `uv run omnilude research --project PROJECT`; append an action below |
 | MCP | Same action names with a `research_` prefix and `project` argument; `research_schema` takes none |
 | Placeholders | Replace `PROJECT`, `EXPERIMENT_ID` and `RUN_ID` with actual paths or IDs |
 
+### Commands
+
 | CLI action | Purpose |
-|---|---|
+| :--- | :--- |
 | `schema` | Print all spec fields, types and defaults; no project required |
 | `create --spec spec.json --workspace /absolute/workspace` | Save a draft and its workspace location |
 | `get EXPERIMENT_ID` | Read the spec, state and provenance |
@@ -413,8 +425,10 @@ uv run omnilude research --project "$omnilude_project" evidence "$run_id" \
 | `record RUN_ID decision\|observation\|interpretation --payload note.json` | Append an attributed assistant account |
 | `list` | List research experiments and their attempts |
 
+### Arguments and reports
+
 | Arguments and reports | Contract |
-|---|---|
+| :--- | :--- |
 | `report` | Does not run `verify`; metrics and check rows appear after verification |
 | MCP arguments | `spec`, `approval` and `payload` are objects; `method` is text. The CLI reads these from files |
 | Decision payload | Nonempty strings: `choice`, `reason`, `rejected_alternative` |
@@ -425,7 +439,7 @@ uv run omnilude research --project "$omnilude_project" evidence "$run_id" \
 <summary>Record acceptance and full-tier approval</summary>
 
 | Assumption acceptance | Action |
-|---|---|
+| :--- | :--- |
 | Read the hash | `preview.assumption_hashes[ASSUMPTION_ID]` |
 | Record consent | After actual user acceptance, add the object below to the assumption's `acceptance` field and update the draft |
 | Preserve origin | Keep `author: "agent"` |
@@ -441,7 +455,7 @@ uv run omnilude research --project "$omnilude_project" evidence "$run_id" \
 ```
 
 | Full approval and confirmation | Action or limit |
-|---|---|
+| :--- | :--- |
 | Full preview | After all changes, preview again and present the method and exact version to the user |
 | Approval file | Save the same three fields in `approval.json`; set `subject_hash` to `protocol_hash` |
 | Freeze | Pass `--approval approval.json` |
@@ -456,7 +470,7 @@ uv run omnilude research --project "$omnilude_project" evidence "$run_id" \
 ### Files, commands and limits
 
 | Setting | Contract |
-|---|---|
+| :--- | :--- |
 | `workspace_paths` | Relative files/directories to copy from the workspace; default `[]` copies no code |
 | `inputs` | Each has `name`, `path`, `role`, `usage`; relative paths resolve from the source workspace |
 | `command` | Argument list executed directly in the copied workspace; no arguments are appended automatically |
@@ -469,8 +483,10 @@ uv run omnilude research --project "$omnilude_project" evidence "$run_id" \
 | `budget_usd` | Optional recorded budget; local spending is not metered or blocked |
 | `env_vars` | Explicit environment names to pass to the command; each must exist in the server environment |
 
+### Execution environment
+
 | Execution detail | Contract |
-|---|---|
+| :--- | :--- |
 | Provided variables | `OMNILUDE_RUN_ID`, `OMNILUDE_INPUTS_DIR`, `OMNILUDE_OUTPUT_DIR` |
 | Outputs | `output/` inside the copied workspace |
 | Input copies | Files: `<name>/<basename>`. Directories: `<name>/...` |
@@ -489,7 +505,7 @@ uv run omnilude research --project "$omnilude_project" evidence "$run_id" \
 ### Records and recovery
 
 | Stored item | Location or contents |
-|---|---|
+| :--- | :--- |
 | Database | `omnilude.sqlite3` in the project store |
 | Frozen protocols | `experiments/<id>/` |
 | Run evidence | `records/<run-id>/` |
@@ -501,8 +517,10 @@ uv run omnilude research --project "$omnilude_project" evidence "$run_id" \
 | Assumption check | `execution/checks/<assumption-id>/result.json` |
 | Read evidence | Use report paths; `evidence` reads text. Open other files from the store |
 
+### Integrity and recovery
+
 | Integrity and recovery | Rule |
-|---|---|
+| :--- | :--- |
 | Frozen/sealed files | Do not edit them; verification detects changes against recorded hashes |
 | Stored evaluation | Reports recheck integrity and flag stale evaluations |
 | Backup | Copy the whole store, preferably with no active workers; the SQLite file alone is insufficient |
@@ -510,8 +528,10 @@ uv run omnilude research --project "$omnilude_project" evidence "$run_id" \
 | Uncertain outcome | No automatic retry |
 | Recovery | Preserves partial evidence; does not resume or repeat the command |
 
+### Troubleshooting
+
 | Situation | What to do |
-|---|---|
+| :--- | :--- |
 | Tools unavailable | Check `codex plugin list --json`, `uv` on Codex's PATH, and a new chat/restart |
 | First MCP connection times out | Run `uv sync --frozen --no-dev --directory /absolute/installed/plugin` using `installedPath` from the install JSON, then reopen the chat. Warm the installed copy, not the clean source bundle |
 | Freeze blocked | Read `preview.blocking_reason`; finish required fields or record actual proposal acceptance/approval |
@@ -526,7 +546,7 @@ uv run omnilude research --project "$omnilude_project" evidence "$run_id" \
 ### Scope of the evidence
 
 | Boundary | Limit |
-|---|---|
+| :--- | :--- |
 | Host access | Commands run with the host user's access; copies and hashes provide records, not data isolation or a security boundary |
 | Visibility | Prediction and target remain visible in the same chat |
 | Capture | Omnilude tools and commands only; excludes other chat actions, temporary edits and external processes |
@@ -539,14 +559,16 @@ uv run omnilude research --project "$omnilude_project" evidence "$run_id" \
 ## Design traceability
 
 | Source | Role |
-|---|---|
+| :--- | :--- |
 | Reading list | Original sources and exact passages linked below |
 | Design provenance | Requirement IDs P1–P18 and D3/D4/D8 are retained from the original design; their current scope is summarized below |
 | Exact passages below | Links to original words; “excerpt” means part of a longer sentence |
 | Strength of evidence | Design motivation; no demonstrated improvement in research quality, verification speed or calibration |
 
+### Sources and adaptations
+
 | Idea | Exact source passage | How Omnilude uses it; strength of support |
-|---|---|---|
+| :--- | :--- | :--- |
 | Researcher first | Excerpt: [“accepting one of the next research directions my agent gives me after completing an experiment instead of typing my own”][source-hgar] — HGAR, footnote 3 | Collect the researcher's position before suggestions. Anecdotal motivation, not evidence that this ordering works. |
 | Record a prediction | [“What result do I expect to get? Is learning that useful?”][source-prediction] — Hughes & Perez, Part 3 | Save the expected result before the run. Practitioner advice; the recording procedure is our adaptation. |
 | Use proportionate process | [“De-risk mode focuses on rapidly answering high-priority questions with minimal overhead.”][source-light] — Hughes & Perez, Part 3 | Light/full tiers. The three-assumption cap and approval rules are our choices. |
@@ -562,7 +584,7 @@ uv run omnilude research --project "$omnilude_project" evidence "$run_id" \
 Implementation and behavioral tests; no scientific validation of the methodology.
 
 | Historical requirement | Current implementation | Verification |
-|---|---|---|
+| :--- | :--- | :--- |
 | P1: researcher input before options | [Skill](skills/omnilude/SKILL.md); prelude and prior-exposure fields | [Protocol tests](tests/test_research_protocol.py) check retained provenance; chat order itself is a skill instruction |
 | P7: researcher selection or randomized option order | **Partial:** prelude before suggestions is specified; option selection/randomization is not implemented as a rule | No test establishes the full historical P7 requirement |
 | P2–P6, P18: metrics, data, selection, success and entry points | [Typed spec](omnilude/research_spec.py), [freeze and snapshots](omnilude/research.py); semantic policies remain declarations | [Protocol](tests/test_research_protocol.py) and [runner](tests/test_local.py) tests |
@@ -574,8 +596,10 @@ Implementation and behavioral tests; no scientific validation of the methodology
 | D8: separate final data and host scoring | Outside the local plugin's scope | Local reports explicitly declare no isolation or independent scoring |
 | D3–D4: validity is distinct from hypothesis truth | Mechanical checks and interpretation remain separate; local hypothesis status stays unassessed | [Runner](tests/test_local.py) and [real MCP lifecycle tests](tests/test_research_interfaces.py) |
 
+### Additional coverage
+
 | Additional coverage | Status |
-|---|---|
+| :--- | :--- |
 | [Packaging tests](tests/test_plugin_package.py) | Required files, exclusion of scratch code and private state, and paths with spaces |
 | [Storage tests](tests/test_spec_store.py) | Research records, state transitions and append-only evidence |
 | Historical roadmap | No independent model verifier or monitor claimed as implemented |
@@ -600,7 +624,7 @@ uv run pytest
 ```
 
 | Reference | Scope |
-|---|---|
+| :--- | :--- |
 | [AGENTS.md](AGENTS.md) | Coding rules |
 | This README | Single project reference for design rationale, source passages and current contracts |
 | Tests | Software behavior, not empirical effectiveness of the research methodology |
