@@ -40,7 +40,7 @@ flowchart LR
 
     subgraph postlude["`**03 · POSTLUDE**`"]
         direction TB
-        evidence["EVIDENCE<br/>Results vs<br/>your prediction<br/>Assumption checks<br/>Method deviations<br/>Raw evidence<br/>Your judgment"]
+        evidence["EVIDENCE<br/>Results vs<br/>your prediction<br/>Assumption checks<br/>Deviations<br/>Raw evidence<br/>Your judgment"]
         evidence@{ shape: doc }
         interpret(["Interpret within<br/>scope"])
         evidence --> interpret
